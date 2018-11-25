@@ -1,6 +1,12 @@
 'use strict';
 
 const server = require('./api/server');
-const { PORT } = require('./api/utils/constants');
+const { PORT, DB_URI } = require('./api/utils/constants');
+const mongoose = require('mongoose')
 
-server.listen(PORT, () => console.log(`App listening on port ${PORT}`));
+console.log(DB_URI)
+server.listen(PORT, async () => {
+  await mongoose.connect(DB_URI);
+  console.log(`Database connected at ${DB_URI}`)
+  console.log(`App listening on port ${PORT}`)
+});
